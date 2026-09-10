@@ -10,5 +10,14 @@ export default defineConfig(({ mode }) => {
     define: {
       'import.meta.env.APP_NAME': JSON.stringify(env.APP_NAME),
     },
+
+    server: {
+      proxy: {
+        '/api': {
+          target: env.API_PROXY_TARGET || 'http://localhost:8000',
+          changeOrigin: true,
+        },
+      },
+    },
   }
 })
